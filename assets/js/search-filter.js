@@ -5,6 +5,8 @@ function timKiem() {
     
     if (searchTerm === '') {
         alert('Vui lòng nhập từ khóa tìm kiếm!');
+
+        
         return;
     }
     
