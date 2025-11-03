@@ -4,7 +4,7 @@ function timKiem() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     
     if (searchTerm === '') {
-        alert('Vui lòng nhập từ khóa tìm kiếm!');
+        alert('Tìm kiếm');
         return;
     }
     
