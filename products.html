@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/category.css" />
+    <!-- THÊM CSS TÌM KIẾM -->
+    <link rel="stylesheet" href="assets/css/search-style.css" />
+    <!-- THÊM FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
     <header class="header">
@@ -19,28 +23,27 @@
           </a>
         </div>
         <div class="header-search">
+          <!-- SỬA LẠI FORM TÌM KIẾM ĐỂ HOẠT ĐỘNG VỚI JAVASCRIPT -->
           <form
-            method="get"
-            action="/tim"
-            enctype="multipart/form-data"
+            id="search-form"
             class="clearfix search-form bg-white"
             role="search"
             aria-label="Tìm kiếm sản phẩm"
+            onsubmit="event.preventDefault(); timKiem();"
           >
-            <select name="scat_id" aria-label="Chọn danh mục">
+            <select id="filter-category" name="scat_id" aria-label="Chọn danh mục">
               <option value="">Tất cả danh mục</option>
-              <option value="1">Màn Hình</option>
-              <option value="2">Bàn Phím</option>
-              <option value="3">Chuột</option>
-              <option value="4">Tai Nghe</option>
-              <option value="5">Loa</option>
-              <option value="6">Mic</option>
+              <option value="manhinh">Màn Hình</option>
+              <option value="banphim">Bàn Phím</option>
+              <option value="chuot">Chuột</option>
+              <option value="tainghe">Tai Nghe</option>
+              <option value="loa">Loa</option>
             </select>
 
             <div class="searh-form-container">
               <input
                 type="text"
-                id="js-search"
+                id="searchInput"
                 class="text_search"
                 name="q"
                 placeholder="Tìm kiếm sản phẩm..."
@@ -213,13 +216,14 @@
     <div class="container">
       <h2 class="section-title" id="category-title">Tất cả sản phẩm</h2>
       <p id="category-desc" style="display: none;"></p>
+      
       <!-- FILTER -->
       <div class="filter-section">
         <div class="filter-row">
             <div class="filter-group">
                 <label for="filter-type">Loại sản phẩm</label>
                 <select id="filter-type">
-                    <option value="" selected>Tât cả loại</option>
+                    <option value="" selected>Tất cả loại</option>
                     <option value="manhinh">Màn hình</option>
                     <option value="banphim">Bàn phím</option>
                     <option value="chuot">Chuột</option>
@@ -262,21 +266,19 @@
                 </select>
             </div>
         </div>
-    </div>
+      </div>
     
-    <!-- PRODUCTS GRID -->
-    <div class="products-grid" id="products-container">
-        <!-- Products will be loaded here -->
-    </div>
+      <!-- PRODUCTS GRID - Container để hiển thị sản phẩm -->
+      <div class="products-grid" id="products-container">
+          <!-- Sản phẩm sẽ được load bởi JavaScript -->
+      </div>
 
-    <!-- NO PRODUCTS MESSAGE -->
-    <div class="no-products" id="no-products">
-        <h3>Không tìm thấy sản phẩm</h3>
-        <p>Vui lòng thử lại với bộ lọc khác</p>
+      <!-- NO PRODUCTS MESSAGE -->
+      <div class="no-products" id="no-products" style="display: none;">
+          <h3>Không tìm thấy sản phẩm</h3>
+          <p>Vui lòng thử lại với bộ lọc khác</p>
+      </div>
     </div>
-</div>
-
-     
 
     <footer>
       <div class="footer-content">
@@ -329,6 +331,8 @@
         <p>&copy; 2025 Tecknole. All rights reserved.</p>
       </div>
     </footer>
+
+    <!-- MODALS -->
     <div id="loginModal" class="auth-modal">
       <div class="auth-modal-overlay" onclick="closeLoginModal()"></div>
       <div class="auth-modal-content">
@@ -546,8 +550,15 @@
         </button>
       </div>
     </div>
+
+    <!-- QUAN TRỌNG: THỨ TỰ IMPORT JAVASCRIPT -->
     <script src="assets/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/modal.js"></script>
-    <script Src="assets/js/product-detail.js"></script>
+    
+    <!-- 1. IMPORT DỮ LIỆU SẢN PHẨM TRƯỚC -->
+    <script src="assets/js/product-detail.js"></script>
+    
+    <!-- 2. IMPORT FILE TÌM KIẾM SAU -->
+    <script src="assets/js/search-filter.js"></script>
   </body>
 </html>
