@@ -1,4 +1,4 @@
-// Hàm tìm kiếm sản phẩm
+
 function timKiem() {
     const searchInput = document.getElementById('searchInput');
     const searchTerm = searchInput.value.toLowerCase().trim();
@@ -7,20 +7,14 @@ function timKiem() {
         alert('Tìm kiếm');
         return;
     }
-    
-    // Chuyển đến trang products.html với từ khóa tìm kiếm
     window.location.href = `products.html?search=${encodeURIComponent(searchTerm)}`;
 }
-
-// Hàm lọc và hiển thị kết quả tìm kiếm
 function hienThiKetQuaTimKiem() {
     // Lấy từ khóa từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const searchTerm = urlParams.get('search');
     
     if (!searchTerm) return;
-    
-    // Đặt lại giá trị cho ô tìm kiếm
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.value = searchTerm;
@@ -28,7 +22,7 @@ function hienThiKetQuaTimKiem() {
     
     // Kiểm tra xem có dữ liệu sản phẩm không
     if (typeof products === 'undefined') {
-        console.error('Không tìm thấy dữ liệu sản phẩm từ product-detail.js');
+        console.error('Không tìm thấy dữ liệu sản phẩm');
         return;
     }
     
@@ -42,8 +36,6 @@ function hienThiKetQuaTimKiem() {
                moTa.includes(searchTerm.toLowerCase()) ||
                danhMuc.includes(searchTerm.toLowerCase());
     });
-    
-    // Hiển thị kết quả
     hienThiSanPham(ketQua, searchTerm);
 }
 
@@ -57,11 +49,7 @@ function hienThiSanPham(danhSachSP, tuKhoa) {
         console.error('Không tìm thấy container để hiển thị sản phẩm');
         return;
     }
-    
-    // Xóa nội dung cũ
     container.innerHTML = '';
-    
-    // Hiển thị tiêu đề kết quả
     const titleDiv = document.createElement('div');
     titleDiv.className = 'search-result-title';
     titleDiv.innerHTML = `
@@ -69,8 +57,7 @@ function hienThiSanPham(danhSachSP, tuKhoa) {
         <p>Tìm thấy ${danhSachSP.length} sản phẩm</p>
     `;
     container.before(titleDiv);
-    
-    // Nếu không có kết quả
+
     if (danhSachSP.length === 0) {
         container.innerHTML = `
             <div class="no-results">
@@ -82,15 +69,11 @@ function hienThiSanPham(danhSachSP, tuKhoa) {
         `;
         return;
     }
-    
-    // Hiển thị từng sản phẩm
     danhSachSP.forEach(product => {
         const productCard = taoTheSanPham(product);
         container.appendChild(productCard);
     });
 }
-
-// Hàm tạo thẻ sản phẩm
 function taoTheSanPham(product) {
     const div = document.createElement('div');
     div.className = 'product-card';
@@ -126,18 +109,12 @@ function taoTheSanPham(product) {
     
     return div;
 }
-
-// Hàm xem chi tiết sản phẩm
 function xemChiTiet(productId) {
     window.location.href = `product-detail.html?id=${productId}`;
 }
-
-// Hàm tìm kiếm theo danh mục
 function timKiemTheoDanhMuc(category) {
     window.location.href = `products.html?category=${encodeURIComponent(category)}`;
 }
-
-// Hàm lọc theo danh mục
 function locTheoDanhMuc() {
     const urlParams = new URLSearchParams(window.location.search);
     const category = urlParams.get('category');
@@ -150,8 +127,6 @@ function locTheoDanhMuc() {
     
     hienThiSanPham(ketQua, `Danh mục: ${category}`);
 }
-
-// Event listeners
 document.addEventListener('DOMContentLoaded', function() {
     // Tìm kiếm bằng phím Enter
     const searchInput = document.getElementById('searchInput');
@@ -162,8 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-    // Tự động hiển thị kết quả khi vào trang products.html
     if (window.location.pathname.includes('products.html')) {
         const urlParams = new URLSearchParams(window.location.search);
         
